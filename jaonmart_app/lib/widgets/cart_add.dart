@@ -2,9 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:jaonmart_app/model/Item.dart';
 import 'package:jaonmart_app/theme.dart';
 
-class CartAdd extends StatelessWidget {
+class CartAdd extends StatefulWidget {
   final Items item;
   CartAdd(this.item);
+
+  @override
+  State<CartAdd> createState() => _CartAddState();
+}
+
+class _CartAddState extends State<CartAdd> {
+  late int _counter;
+  @override
+  void initState() {
+    super.initState();
+    _counter = widget.item.qty;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,7 +31,7 @@ class CartAdd extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(
-              'assets/images/${item.gambar}',
+              'assets/images/${widget.item.gambar}',
               width: 100,
               height: 100,
               fit: BoxFit.cover,
@@ -29,11 +42,11 @@ class CartAdd extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  '${item.nama}',
+                  '${widget.item.nama}',
                   style: myStyle.copyWith(fontSize: 15, color: makeColor),
                 ),
                 Text(
-                  '${item.produk}',
+                  '${widget.item.produk}',
                   style: myStyle.copyWith(
                       fontSize: 14, fontWeight: FontWeight.w900),
                 ),
@@ -41,7 +54,7 @@ class CartAdd extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'RP. ${item.harga}',
+                  'RP. ${widget.item.harga}',
                   // 'RP. ${item.harga * counter}',
                   style: myStyle.copyWith(
                       fontSize: 12, fontWeight: FontWeight.bold),
@@ -58,17 +71,17 @@ class CartAdd extends StatelessWidget {
             child: Column(
               children: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: _setMin,
                     icon: Icon(
                       Icons.remove,
                       size: 20,
                     )),
                 Text(
-                  '${item.qty}',
+                  '${_counter}',
                   style: myStyle,
                 ),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: _setPlus,
                     icon: Icon(
                       Icons.add,
                       size: 20,
@@ -79,5 +92,19 @@ class CartAdd extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _setPlus() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _setMin() {
+    if (_counter > 0) {
+      setState(() {
+        _counter--;
+      });
+    }
   }
 }
