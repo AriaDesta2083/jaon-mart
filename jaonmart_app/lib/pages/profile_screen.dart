@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/profile_menu.dart';
+
 class ProfileScreen extends StatelessWidget {
   static String routeName = "/profile";
   @override
@@ -54,23 +55,25 @@ class ProfileScreen extends StatelessWidget {
             ProfileMenu(
               text: "My Account",
               icon: Icon(Icons.account_box_outlined),
-              press: () => {},
+              press: () {
+                Navigator.of(context).pushNamed('/account');
+              },
             ),
-            ProfileMenu(
-              text: "Notifications",
-              icon: Icon(Icons.notifications_sharp),
-              press: () {},
-            ),
-            ProfileMenu(
-              text: "Settings",
-              icon: Icon(Icons.settings),
-              press: () {},
-            ),
-            ProfileMenu(
-              text: "Help Center",
-              icon: Icon(Icons.help_outline_outlined),
-              press: () {},
-            ),
+            // ProfileMenu(
+            //   text: "Notifications",
+            //   icon: Icon(Icons.notifications_sharp),
+            //   press: () {},
+            // ),
+            // ProfileMenu(
+            //   text: "Settings",
+            //   icon: Icon(Icons.settings),
+            //   press: () {},
+            // ),
+            // ProfileMenu(
+            //   text: "Help Center",
+            //   icon: Icon(Icons.help_outline_outlined),
+            //   press: () {},
+            // ),
             ProfileMenu(
               text: "Log Out",
               icon: Icon(Icons.logout_sharp),

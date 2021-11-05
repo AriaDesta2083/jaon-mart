@@ -66,6 +66,10 @@ const String pwNull = "Masukkan Password";
 const String pwInvalid = "Password terlalu pendek";
 const String pwFalse = "Passwords Salah";
 
+const String nameNull = "Masukkan nama degan benar ";
+const String numberNull = "Masukkan nomor telefon";
+const String adrdresNull = "Masukkan alamat";
+
 class KeyboardUtil {
   static void hideKeyboard(BuildContext context) {
     FocusScopeNode currentFocus = FocusScope.of(context);
