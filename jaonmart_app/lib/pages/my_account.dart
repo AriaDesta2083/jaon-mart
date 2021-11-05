@@ -87,6 +87,14 @@ class _ProfileFormState extends State<ProfileForm> {
           buildAddressFormField(),
           FormError(errors: errors),
           SizedBox(height: 40),
+          // DefaultButton(
+          //   text: "continue",
+          //   press: () {
+          //     if (_formKey.currentState!.validate()) {
+          //       Navigator.pushNamed(context, OtpScreen.routeName);
+          //     }
+          //   },
+          // ),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -98,7 +106,7 @@ class _ProfileFormState extends State<ProfileForm> {
                   Navigator.of(context).pushNamed('/profile');
                 }
               },
-              child: Text('Complete Account'))
+              child: Text('Save'))
         ],
       ),
     );
