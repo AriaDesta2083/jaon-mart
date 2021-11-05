@@ -108,7 +108,27 @@ class _DetailScreenState extends State<DetailScreen> {
               ],
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    duration: Duration(seconds: 1),
+                    backgroundColor: makeColor,
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'Add your cart',
+                          style: myStyle.copyWith(color: Colors.white),
+                        ),
+                        Icon(
+                          Icons.task_alt_rounded,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
               style: ElevatedButton.styleFrom(
                   primary: makeColor,
                   fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50),

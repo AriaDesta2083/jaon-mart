@@ -63,7 +63,8 @@ class CardItem extends StatelessWidget {
                                   children: [
                                     Text(
                                       'Add your cart',
-                                      style: myStyle,
+                                      style:
+                                          myStyle.copyWith(color: Colors.white),
                                     ),
                                     Icon(
                                       Icons.task_alt_rounded,
