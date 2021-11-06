@@ -13,34 +13,39 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        // title: Text('SIGN IN'),
-      ),
-      body: SafeArea(
-        bottom: false,
-        child: SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-                  Text(
-                    "JAONMART",
-                    style: myBoldStyle,
-                  ),
-                  Text(
-                    "Sign in with your email and password",
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.08),
-                  SignForm(),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.08),
-                  NoAccountText(),
-                ],
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          // title: Text('SIGN IN'),
+        ),
+        body: SafeArea(
+          bottom: false,
+          child: SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                    Text(
+                      "JAONMART",
+                      style: myBoldStyle,
+                    ),
+                    Text(
+                      "Sign in with your email and password",
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.08),
+                    SignForm(),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.08),
+                    NoAccountText(),
+                  ],
+                ),
               ),
             ),
           ),

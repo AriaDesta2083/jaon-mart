@@ -14,8 +14,8 @@ class _MyAccountState extends State<MyAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
-      ),
+          // title: Text('Sign Up'),
+          ),
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
