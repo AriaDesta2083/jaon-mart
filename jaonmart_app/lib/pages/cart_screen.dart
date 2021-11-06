@@ -84,14 +84,6 @@ class _CartScreenState extends State<CartScreen> {
           appBar: AppBar(
             backgroundColor: Colors.white,
             title: Text('Cart'),
-            actions: [
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.more_vert_sharp,
-                    size: 30,
-                  ))
-            ],
           ),
           body: SafeArea(
             child: ListView(

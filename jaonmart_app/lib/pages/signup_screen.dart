@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jaonmart_app/pages/home_screen.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/form_widgets.dart';
 
@@ -14,8 +15,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          // title: Text("Sign Up"),
-          ),
+        automaticallyImplyLeading: false,
+        // title: Text("Sign Up"),F
+      ),
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
@@ -103,6 +105,8 @@ class _SignUpFormState extends State<SignUpForm> {
                 // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
                 Navigator.of(context).pushNamed('/signin');
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
               }
             },
             child: Text(
@@ -141,7 +145,7 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Confirm Password",
         hintText: "Re-enter your password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        icon: Icon(
+        suffixIcon: Icon(
           Icons.lock,
           color: makeColor,
         ),
@@ -175,7 +179,7 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Password",
         hintText: "Enter your password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        icon: Icon(
+        suffixIcon: Icon(
           Icons.lock,
           color: makeColor,
         ),
@@ -209,7 +213,7 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Email",
         hintText: "Enter your email",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        icon: Icon(
+        suffixIcon: Icon(
           Icons.mail,
           color: makeColor,
         ),

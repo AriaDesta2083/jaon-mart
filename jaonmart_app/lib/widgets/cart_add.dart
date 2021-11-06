@@ -11,13 +11,6 @@ class CartAdd extends StatefulWidget {
 }
 
 class _CartAddState extends State<CartAdd> {
-  late int _counter;
-  @override
-  void initState() {
-    super.initState();
-    _counter = widget.item.qty;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -71,17 +64,17 @@ class _CartAddState extends State<CartAdd> {
             child: Column(
               children: [
                 IconButton(
-                    onPressed: _setMin,
+                    onPressed: () {},
                     icon: Icon(
                       Icons.remove,
                       size: 20,
                     )),
                 Text(
-                  '${_counter}',
+                  '${widget.item.qty}',
                   style: myStyle,
                 ),
                 IconButton(
-                    onPressed: _setPlus,
+                    onPressed: () {},
                     icon: Icon(
                       Icons.add,
                       size: 20,
@@ -92,19 +85,5 @@ class _CartAddState extends State<CartAdd> {
         ],
       ),
     );
-  }
-
-  void _setPlus() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _setMin() {
-    if (_counter > 0) {
-      setState(() {
-        _counter--;
-      });
-    }
   }
 }

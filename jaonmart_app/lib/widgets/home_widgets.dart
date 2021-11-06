@@ -31,12 +31,6 @@ class TopHome extends StatelessWidget {
                   Icons.shopping_cart_outlined,
                   size: 27,
                 )),
-            IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.more_vert_sharp,
-                  size: 27,
-                )),
           ],
         ),
       ],

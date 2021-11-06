@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jaonmart_app/pages/signin_screen.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/profile_menu.dart';
 
@@ -78,7 +79,8 @@ class ProfileScreen extends StatelessWidget {
               text: "Log Out",
               icon: Icon(Icons.logout_sharp),
               press: () {
-                Navigator.of(context).pushNamed('/signin');
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()));
               },
             ),
           ],

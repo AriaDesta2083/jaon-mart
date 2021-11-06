@@ -12,17 +12,11 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late int _counter;
-  @override
-  void initState() {
-    super.initState();
-    _counter = widget.item.qty;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Detail'),
         actions: [
           IconButton(
             onPressed: () {
@@ -33,13 +27,6 @@ class _DetailScreenState extends State<DetailScreen> {
               size: 30,
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.more_vert_sharp,
-              size: 30,
-            ),
-          )
         ],
       ),
       bottomNavigationBar: Container(
@@ -70,7 +57,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     style: myBoldStyle.copyWith(fontSize: 17),
                     children: [
                       TextSpan(
-                        text: '${widget.item.harga * _counter}',
+                        text: '${widget.item.harga}',
                         // text: '${widget.item.harga  * counter}',
                         style: myBoldStyle.copyWith(
                             fontSize: 28, fontWeight: FontWeight.w900),
@@ -87,7 +74,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: _setMin,
+                          onPressed: () {},
                           icon: Icon(
                             Icons.remove,
                             size: 20,
@@ -96,14 +83,14 @@ class _DetailScreenState extends State<DetailScreen> {
                         width: 25,
                       ),
                       Text(
-                        '${_counter}',
+                        '${widget.item.qty}',
                         style: myStyle,
                       ),
                       SizedBox(
                         width: 25,
                       ),
                       IconButton(
-                        onPressed: _setPlus,
+                        onPressed: () {},
                         icon: Icon(
                           Icons.add,
                           size: 20,
@@ -231,23 +218,9 @@ class _DetailScreenState extends State<DetailScreen> {
               fontSize: 25,
             ),
           ),
-          Text('${widget.item.dekskripsi}')
+          Text('${widget.item.dekskripsi}'),
         ],
       ),
     );
-  }
-
-  void _setPlus() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _setMin() {
-    if (_counter > 0) {
-      setState(() {
-        _counter--;
-      });
-    }
   }
 }
