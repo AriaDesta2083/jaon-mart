@@ -12,6 +12,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  late int _counter;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +58,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     style: myBoldStyle.copyWith(fontSize: 17),
                     children: [
                       TextSpan(
-                        text: '${widget.item.harga}',
+                        text: '${widget.item.harga * _counter}',
                         // text: '${widget.item.harga  * counter}',
                         style: myBoldStyle.copyWith(
                             fontSize: 28, fontWeight: FontWeight.w900),
@@ -74,7 +75,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: _setMinus,
                           icon: Icon(
                             Icons.remove,
                             size: 20,
@@ -83,14 +84,14 @@ class _DetailScreenState extends State<DetailScreen> {
                         width: 25,
                       ),
                       Text(
-                        '${widget.item.qty}',
+                        '${_counter}',
                         style: myStyle,
                       ),
                       SizedBox(
                         width: 25,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: _setPlus,
                         icon: Icon(
                           Icons.add,
                           size: 20,
@@ -222,5 +223,25 @@ class _DetailScreenState extends State<DetailScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _counter = widget.item.qty;
+  }
+
+  void _setPlus() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _setMinus() {
+    if (_counter > 0) {
+      setState(() {
+        _counter--;
+      });
+    }
   }
 }
