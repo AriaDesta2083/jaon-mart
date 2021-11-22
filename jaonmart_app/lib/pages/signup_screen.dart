@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/pages/home_screen.dart';
+import 'package:jaonmart_app/services/auth_services.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/form_widgets.dart';
 
@@ -60,6 +61,8 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController(text: "");
+  TextEditingController passController = TextEditingController(text: "");
   String? email;
   String? password;
   String? conform_password;
@@ -99,14 +102,14 @@ class _SignUpFormState extends State<SignUpForm> {
                     borderRadius: BorderRadius.circular(20)),
                 primary: makeColor,
                 fixedSize: Size(double.maxFinite, 56)),
-            onPressed: () {
+            onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
                 Navigator.of(context).pushNamed('/signin');
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
+                await AuthServices.signUp(
+                    emailController.text, passController.text);
               }
             },
             child: Text(
@@ -155,6 +158,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
+      controller: passController,
       obscureText: true,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
@@ -189,6 +193,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {

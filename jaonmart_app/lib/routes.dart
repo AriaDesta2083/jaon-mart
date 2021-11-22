@@ -9,7 +9,6 @@ import 'package:jaonmart_app/pages/splash_screen.dart';
 
 final Map<String, WidgetBuilder> myRoutes = {
   '/splash': (context) => SplashScreen(),
-  '/home': (context) => HomeScreen(),
   '/signin': (context) => SignInScreen(),
   '/signup': (context) => SignUpScreen(),
   '/cart': (context) => CartScreen(),

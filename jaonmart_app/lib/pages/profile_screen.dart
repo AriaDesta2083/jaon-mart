@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/pages/signin_screen.dart';
+import 'package:jaonmart_app/pages/splash_screen.dart';
+import 'package:jaonmart_app/services/auth_services.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/profile_menu.dart';
 
 class ProfileScreen extends StatelessWidget {
-  static String routeName = "/profile";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,9 +79,10 @@ class ProfileScreen extends StatelessWidget {
             ProfileMenu(
               text: "Log Out",
               icon: Icon(Icons.logout_sharp),
-              press: () {
+              press: () async {
+                await AuthServices.signOut();
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => SignInScreen()));
+                    MaterialPageRoute(builder: (context) => SplashScreen()));
               },
             ),
           ],

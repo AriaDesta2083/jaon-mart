@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/pages/home_screen.dart';
+import 'package:jaonmart_app/pages/splash_screen.dart';
+import 'package:jaonmart_app/services/auth_services.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/form_widgets.dart';
 
@@ -64,6 +66,8 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController(text: "");
+  TextEditingController passController = TextEditingController(text: "");
   String? email;
   String? password;
   bool? remember = false;
@@ -124,13 +128,15 @@ class _SignFormState extends State<SignForm> {
                     borderRadius: BorderRadius.circular(20)),
                 primary: makeColor,
                 fixedSize: Size(double.maxFinite, 56)),
-            onPressed: () {
+            onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
+                    MaterialPageRoute(builder: (context) => SplashScreen()));
+                await AuthServices.signIn(
+                    emailController.text, passController.text);
               }
             },
             child: Text(
@@ -145,6 +151,7 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
+      controller: passController,
       obscureText: true,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
@@ -179,6 +186,7 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
       onChanged: (value) {
         if (value.isNotEmpty) {

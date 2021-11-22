@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1030206239365",
+    "project_id": "authentication-jaonmart",
+    "storage_bucket": "authentication-jaonmart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030206239365:android:504ebb0d62f366fdf7efec",
+        "android_client_info": {
+          "package_name": "com.example.jaonmart_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030206239365-jrsblu0o9uakst8l9jiopb5h5dfiau5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx9aQCcOSQz7NZ5IxtHw-GRmcLcx2IL1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030206239365-jrsblu0o9uakst8l9jiopb5h5dfiau5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/model/Item.dart';
 import 'package:jaonmart_app/model/pack_item.dart';
@@ -7,8 +8,8 @@ import 'package:jaonmart_app/widgets/card_item.dart';
 import 'package:jaonmart_app/widgets/home_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
+  final User user;
+  HomeScreen(this.user);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: myBoldStyle.copyWith(fontSize: 24),
               ),
               Text(
-                'Market Jajajanan Online ',
+                widget.user.uid,
                 style: myBoldStyle.copyWith(
                     color: makeColor,
                     fontWeight: FontWeight.w400,
