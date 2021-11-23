@@ -132,9 +132,7 @@ class _SignFormState extends State<SignForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
-                KeyboardUtil.hideKeyboard(context);
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => SplashScreen()));
+                KeyboardUtil.hideKeyboard(context); 
                 await AuthServices.signIn(
                     emailController.text, passController.text);
               }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/model/Item.dart';
@@ -70,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (c) => DetailScreen(
+                                      widget.user,
                                       Items(
                                           id: item.id,
                                           qty: item.qty,
@@ -82,14 +84,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 );
                               },
-                              child: CardItem(Items(
-                                  id: item.id,
-                                  qty: item.qty,
-                                  nama: item.nama,
-                                  produk: item.produk,
-                                  gambar: item.gambar,
-                                  harga: item.harga,
-                                  dekskripsi: item.dekskripsi)),
+                              child: CardItem(
+                                  widget.user,
+                                  Items(
+                                      id: item.id,
+                                      qty: item.qty,
+                                      nama: item.nama,
+                                      produk: item.produk,
+                                      gambar: item.gambar,
+                                      harga: item.harga,
+                                      dekskripsi: item.dekskripsi)),
                             ),
                           ),
                         )
@@ -116,6 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => DetailScreen(
+                                            widget.user,
                                             Items(
                                                 id: pack.id,
                                                 qty: pack.qty,

@@ -15,7 +15,7 @@ class Items {
     return <Items>[
       Items(
           id: 1,
-          qty: 1,
+          qty: 0,
           nama: 'Nama Item 1',
           produk: 'Nama Produk 1',
           harga: 10000,
@@ -24,7 +24,7 @@ class Items {
               'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi alias nihil esse eum hic ab provident? Numquam incidunt adipisci eum.'),
       Items(
           id: 2,
-          qty: 2,
+          qty: 0,
           nama: 'Nama Item 2',
           produk: 'Nama Produk 2',
           harga: 20000,
@@ -33,7 +33,7 @@ class Items {
               'Ipsum dolor sit amet consectetur adipisicing elit. Sequi alias nihil esse eum hic ab provident? Numquam incidunt adipisci eum.'),
       Items(
           id: 3,
-          qty: 3,
+          qty: 0,
           nama: 'Nama Item 3',
           produk: 'Nama Produk 3',
           harga: 30000,
@@ -42,7 +42,7 @@ class Items {
               'Dolor sit amet consectetur adipisicing elit. Sequi alias nihil esse eum hic ab provident? Numquam incidunt adipisci eum.'),
       Items(
           id: 4,
-          qty: 4,
+          qty: 0,
           nama: 'Nama Item 4',
           produk: 'Nama Produk 4',
           harga: 40000,

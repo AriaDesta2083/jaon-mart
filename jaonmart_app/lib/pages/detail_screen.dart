@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/model/Item.dart';
 import 'package:jaonmart_app/model/pack_item.dart';
@@ -5,8 +7,9 @@ import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/card_item.dart';
 
 class DetailScreen extends StatefulWidget {
+  final User user;
   final Items item;
-  DetailScreen(this.item);
+  DetailScreen(this.user, this.item);
   @override
   _DetailScreenState createState() => _DetailScreenState();
 }
@@ -15,6 +18,8 @@ class _DetailScreenState extends State<DetailScreen> {
   late int _counter;
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference pesan_item = firestore.collection('pesan_item');
     return Scaffold(
       appBar: AppBar(
         title: Text('Detail'),
@@ -104,6 +109,16 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             ElevatedButton(
               onPressed: () {
+                pesan_item.add({
+                  'id': widget.item.id,
+                  'qty': widget.item.qty,
+                  'nama': widget.item.nama,
+                  'produk': widget.item.produk,
+                  'harga': widget.item.harga,
+                  'gambar': widget.item.gambar,
+                  'dekskripsi': widget.item.dekskripsi,
+                  'user_id': widget.user.uid,
+                });
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 1),

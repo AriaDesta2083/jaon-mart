@@ -1,13 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/model/Item.dart';
 import 'package:jaonmart_app/model/pack_item.dart';
 import 'package:jaonmart_app/theme.dart';
 
 class CardItem extends StatelessWidget {
+  final User user;
   final Items item;
-  CardItem(this.item);
+  CardItem(this.user, this.item);
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference pesan_item = firestore.collection('pesan_item');
     return Card(
       color: Colors.white,
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -53,6 +58,17 @@ class CardItem extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
+                            //! ADD DATA
+                            pesan_item.add({
+                              'id': item.id,
+                              'qty': item.qty,
+                              'nama': item.nama,
+                              'produk': item.produk,
+                              'harga': item.harga,
+                              'gambar': item.gambar,
+                              'dekskripsi': item.dekskripsi,
+                              'user_id': user.uid,
+                            });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 duration: Duration(seconds: 1),
