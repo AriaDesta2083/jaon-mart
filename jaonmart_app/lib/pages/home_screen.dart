@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(15),
           child: ListView(
             children: [
-              TopHome(),
+              TopHome(widget.user),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),

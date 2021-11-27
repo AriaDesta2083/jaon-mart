@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jaonmart_app/pages/my_account.dart';
 import 'package:jaonmart_app/services/auth_services.dart';
 import 'package:jaonmart_app/services/wrapper.dart';
 import 'package:jaonmart_app/theme.dart';
@@ -109,7 +110,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 KeyboardUtil.hideKeyboard(context);
 
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => Wrapper()));
+                    MaterialPageRoute(builder: (context) => MyAccount()));
                 await AuthServices.signUp(
                     emailController.text, passController.text);
               }

@@ -1,20 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:jaonmart_app/model/Item.dart';
 import 'package:jaonmart_app/theme.dart';
 
 class CartAdd extends StatefulWidget {
-  final Items item;
-  CartAdd(this.item);
+  final int id, qty, harga;
+  final String produk, nama, dekskripsi, gambar;
+  final Function delCart;
+  final Function upCart;
+  final Function minCart;
+
+  CartAdd(this.id, this.qty, this.nama, this.produk, this.gambar, this.harga,
+      this.dekskripsi,
+      {required this.delCart, required this.upCart, required this.minCart});
 
   @override
   State<CartAdd> createState() => _CartAddState();
 }
 
 class _CartAddState extends State<CartAdd> {
-  late int _counter;
-
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference pesan_item = firestore.collection('pesan_item');
     return Card(
       elevation: 3,
       margin: EdgeInsets.all(20),
@@ -26,7 +33,7 @@ class _CartAddState extends State<CartAdd> {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(
-              'assets/images/${widget.item.gambar}',
+              'assets/images/${widget.gambar}',
               width: 100,
               height: 100,
               fit: BoxFit.cover,
@@ -37,11 +44,11 @@ class _CartAddState extends State<CartAdd> {
             child: Column(
               children: [
                 Text(
-                  '${widget.item.nama}',
+                  '${widget.nama}',
                   style: myStyle.copyWith(fontSize: 15, color: makeColor),
                 ),
                 Text(
-                  '${widget.item.produk}',
+                  '${widget.produk}',
                   style: myStyle.copyWith(
                       fontSize: 14, fontWeight: FontWeight.w900),
                 ),
@@ -49,7 +56,7 @@ class _CartAddState extends State<CartAdd> {
                   height: 10,
                 ),
                 Text(
-                  'RP. ${widget.item.harga}',
+                  'RP. ${widget.harga}',
                   // 'RP. ${item.harga * counter}',
                   style: myStyle.copyWith(
                       fontSize: 12, fontWeight: FontWeight.bold),
@@ -66,13 +73,19 @@ class _CartAddState extends State<CartAdd> {
             child: Column(
               children: [
                 IconButton(
-                    onPressed: _setMinus,
-                    icon: Icon(
-                      Icons.remove,
-                      size: 20,
-                    )),
+                    onPressed: (widget.qty != 0) ? _setMinus : _delCarrt,
+                    icon: (widget.qty != 0)
+                        ? Icon(
+                            Icons.remove,
+                            size: 20,
+                          )
+                        : Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                            size: 21,
+                          )),
                 Text(
-                  '${_counter}',
+                  '${widget.qty}',
                   style: myStyle,
                 ),
                 IconButton(
@@ -89,23 +102,23 @@ class _CartAddState extends State<CartAdd> {
     );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _counter = widget.item.qty;
-  }
-
   void _setPlus() {
     setState(() {
-      _counter++;
+      widget.upCart();
     });
   }
 
   void _setMinus() {
-    if (_counter > 0) {
+    if (widget.qty > 0) {
       setState(() {
-        _counter--;
+        widget.minCart();
       });
     }
+  }
+
+  void _delCarrt() {
+    setState(() {
+      widget.delCart();
+    });
   }
 }

@@ -52,7 +52,7 @@ class CardItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          '${item.harga}',
+                          'Rp ${item.harga}',
                           style: myStyle.copyWith(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),

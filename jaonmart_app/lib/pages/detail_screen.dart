@@ -63,8 +63,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     style: myBoldStyle.copyWith(fontSize: 17),
                     children: [
                       TextSpan(
-                        text: '${widget.item.harga * _counter}',
-                        // text: '${widget.item.harga  * counter}',
+                        text: '${widget.item.harga}',
                         style: myBoldStyle.copyWith(
                             fontSize: 28, fontWeight: FontWeight.w900),
                       ),
@@ -111,7 +110,7 @@ class _DetailScreenState extends State<DetailScreen> {
               onPressed: () {
                 pesan_item.add({
                   'id': widget.item.id,
-                  'qty': widget.item.qty,
+                  'qty': _counter,
                   'nama': widget.item.nama,
                   'produk': widget.item.produk,
                   'harga': widget.item.harga,

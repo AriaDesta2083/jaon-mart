@@ -1,13 +1,28 @@
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jaonmart_app/pages/signin_screen.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jaonmart_app/pages/splash_screen.dart';
 import 'package:jaonmart_app/services/auth_services.dart';
+import 'package:jaonmart_app/services/database_services.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/profile_menu.dart';
+import 'package:provider/provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  final User user;
+  ProfileScreen(this.user);
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String? imagePath;
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference profile = firestore.collection('profile');
     return Scaffold(
       appBar: AppBar(
           // title: Text("Profile"),
@@ -23,11 +38,13 @@ class ProfileScreen extends StatelessWidget {
                 fit: StackFit.expand,
                 clipBehavior: Clip.none,
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(
-                      "assets/images/AR.jpg",
-                    ),
-                  ),
+                  (imagePath != null)
+                      ? CircleAvatar(
+                          backgroundImage: NetworkImage(imagePath!),
+                        )
+                      : CircleAvatar(
+                          backgroundColor: Colors.black,
+                        ),
                   Positioned(
                     right: -16,
                     bottom: 0,
@@ -43,7 +60,18 @@ class ProfileScreen extends StatelessWidget {
                             primary: Colors.white,
                             backgroundColor: Color(0xFFF5F6F9),
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            File file = await getImage();
+                            await DatabaseServices.uploadImage(file);
+                            imagePath =
+                                await DatabaseServices.uploadImage(file);
+                            setState(() {
+                              profile.add({
+                                'user_id': widget.user.uid,
+                                'path_image': imagePath
+                              });
+                            });
+                          },
                           child: Icon(
                             Icons.add_a_photo,
                             color: makeColor,
@@ -89,5 +117,9 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<File> getImage() async {
+    return await ImagePicker.pickImage(source: ImageSource.gallery);
   }
 }

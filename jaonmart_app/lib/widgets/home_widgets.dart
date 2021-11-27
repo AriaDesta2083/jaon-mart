@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jaonmart_app/pages/profile_screen.dart';
 
 class TopHome extends StatelessWidget {
-  const TopHome({Key? key}) : super(key: key);
-
+  final User user;
+  TopHome(this.user);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -25,7 +27,11 @@ class TopHome extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/cart');
+                  Navigator.push(
+                      (context),
+                      MaterialPageRoute(
+                        builder: (context) => ProfileScreen(user),
+                      ));
                 },
                 icon: Icon(
                   Icons.shopping_cart_outlined,
