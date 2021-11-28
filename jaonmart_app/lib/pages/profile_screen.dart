@@ -38,13 +38,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 fit: StackFit.expand,
                 clipBehavior: Clip.none,
                 children: [
-                  (imagePath != null)
-                      ? CircleAvatar(
-                          backgroundImage: NetworkImage(imagePath!),
-                        )
-                      : CircleAvatar(
-                          backgroundColor: Colors.black,
-                        ),
+                  StreamBuilder<QuerySnapshot>(
+                      stream: profile
+                          .where('user_id', isEqualTo: widget.user.uid)
+                          .snapshots(),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasData) {
+                          var myProfile = snapshot.data!.docs;
+                          String? myimage;
+                          for (var i = 0; i < myProfile.length; i++) {
+                            myimage = (myProfile[i]['path_image']);
+                          }
+                          return (myimage != null)
+                              ? CircleAvatar(
+                                  backgroundImage: NetworkImage(myimage),
+                                )
+                              : CircleAvatar(
+                                  backgroundColor: Colors.black,
+                                );
+                        } else {
+                          return CircleAvatar(
+                            backgroundColor: Colors.black,
+                          );
+                        }
+                      }),
                   Positioned(
                     right: -16,
                     bottom: 0,
@@ -70,6 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 'user_id': widget.user.uid,
                                 'path_image': imagePath
                               });
+                              setState(() {});
                             });
                           },
                           child: Icon(

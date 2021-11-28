@@ -78,7 +78,7 @@ class _CartScreenState extends State<CartScreen> {
                               style: myBoldStyle.copyWith(fontSize: 17),
                               children: [
                                 TextSpan(
-                                  text: '1',
+                                  text: '0',
                                   style: myBoldStyle.copyWith(
                                       fontSize: 28,
                                       fontWeight: FontWeight.w900),
@@ -175,9 +175,11 @@ class _CartScreenState extends State<CartScreen> {
                           .toList(),
                     );
                   } else {
-                    return Text(
-                      'Belum Ada Pesanan',
-                      style: myStyle,
+                    return Center(
+                      child: Text(
+                        'Belum Ada Pesanan',
+                        style: myStyle,
+                      ),
                     );
                   }
                 },

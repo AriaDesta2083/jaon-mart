@@ -12,4 +12,4 @@ class Wrapper extends StatelessWidget {
     User user = Provider.of<User>(context);
     return (user == null) ? SignInScreen() : HomeScreen(user);
   }
-} 
+}
