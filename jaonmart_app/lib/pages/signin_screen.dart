@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jaonmart_app/pages/home_screen.dart';
 import 'package:jaonmart_app/pages/splash_screen.dart';
 import 'package:jaonmart_app/services/auth_services.dart';
@@ -136,7 +137,7 @@ class _SignFormState extends State<SignForm> {
                 await AuthServices.signIn(
                     emailController.text, passController.text);
               }
-              return null;
+              return;
             },
             child: Text(
               'Continue',

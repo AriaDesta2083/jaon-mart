@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:jaonmart_app/pages/splash_screen.dart';
 import 'package:jaonmart_app/routes.dart';
 import 'package:jaonmart_app/services/auth_services.dart';
@@ -25,7 +26,7 @@ class _MyAppState extends State<MyApp> {
     return StreamProvider.value(
       value: AuthServices.userStream,
       initialData: null,
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
         routes: myRoutes,

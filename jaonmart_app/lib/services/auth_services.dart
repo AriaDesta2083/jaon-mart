@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
 class AuthServices {
   static FirebaseAuth _auth = FirebaseAuth.instance;
@@ -23,8 +24,9 @@ class AuthServices {
       final User? user = result.user;
       return user;
     } catch (eror) {
+      Get.defaultDialog(
+          title: 'Login Gagal', middleText: 'maaf login gagal coba lagi');
       print(eror.toString());
-      return null;
     }
   }
 
