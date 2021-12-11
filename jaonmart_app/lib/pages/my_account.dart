@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jaonmart_app/services/wrapper.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/form_widgets.dart';
+import 'package:provider/provider.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({Key? key}) : super(key: key);
@@ -53,6 +57,10 @@ class ProfileForm extends StatefulWidget {
 class _ProfileFormState extends State<ProfileForm> {
   final _formKey = GlobalKey<FormState>();
   final List<String?> errors = [];
+  TextEditingController _firstName = TextEditingController();
+  TextEditingController _lastName = TextEditingController();
+  TextEditingController _phoneNumber = TextEditingController();
+  TextEditingController _address = TextEditingController();
   String? firstName;
   String? lastName;
   String? phoneNumber;
@@ -74,6 +82,9 @@ class _ProfileFormState extends State<ProfileForm> {
 
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<User>(context);
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference profile = firestore.collection('profile');
     return Form(
       key: _formKey,
       child: Column(
@@ -95,7 +106,15 @@ class _ProfileFormState extends State<ProfileForm> {
                   fixedSize: Size(double.maxFinite, 56)),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  Navigator.of(context).pushNamed('/profile');
+                  profile.add({
+                    'id': user.uid,
+                    'firstName': _firstName.text,
+                    'lastName': _lastName.text,
+                    'phoneNumber': _phoneNumber.text,
+                    'address': _address.text
+                  });
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => WProfile()));
                 }
               },
               child: Text('Save'))
@@ -106,6 +125,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   TextFormField buildAddressFormField() {
     return TextFormField(
+      controller: _address,
       onSaved: (newValue) => address = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -133,6 +153,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   TextFormField buildPhoneNumberFormField() {
     return TextFormField(
+      controller: _phoneNumber,
       keyboardType: TextInputType.phone,
       onSaved: (newValue) => phoneNumber = newValue,
       onChanged: (value) {
@@ -162,6 +183,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   TextFormField buildLastNameFormField() {
     return TextFormField(
+      controller: _lastName,
       onSaved: (newValue) => lastName = newValue,
       decoration: InputDecoration(
           labelText: "Last Name",
@@ -176,6 +198,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   TextFormField buildFirstNameFormField() {
     return TextFormField(
+      controller: _firstName,
       onSaved: (newValue) => firstName = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {

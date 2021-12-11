@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/model/Item.dart';
 import 'package:jaonmart_app/model/pack_item.dart';
+import 'package:jaonmart_app/pages/profile_screen.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/card_item.dart';
 
@@ -16,6 +17,8 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   late int _counter;
+  late PackItems item;
+  var Req = PackItems.getItems();
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -203,21 +206,38 @@ class _DetailScreenState extends State<DetailScreen> {
                   SizedBox(
                     height: 5,
                   ),
-                  for (var i = 2; i < 2 + 3; i++)
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 10, right: 20, left: 10),
-                      child: Container(
-                        height: 80,
-                        width: 80,
-                        child: CardItemPack(PackItems(
-                            id: 1,
-                            qty: 2,
-                            nama: 'nama',
-                            produk: 'produk',
-                            harga: 20000,
-                            gambar: 'pack$i.jpg',
-                            dekskripsi: 'dekskripsi')),
+                  for (var i = 0; i < 3; i++)
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            (MaterialPageRoute(
+                                builder: (context) => DetailScreen(
+                                    widget.user,
+                                    Items(
+                                        id: Req[i].id,
+                                        qty: Req[i].qty,
+                                        nama: Req[i].nama,
+                                        produk: Req[i].produk,
+                                        harga: Req[i].harga,
+                                        gambar: Req[i].gambar,
+                                        dekskripsi: Req[i].dekskripsi)))));
+                      },
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 10, right: 20, left: 10),
+                        child: Container(
+                          height: 80,
+                          width: 80,
+                          child: CardItemPack(PackItems(
+                              id: Req[i].id,
+                              qty: Req[i].qty,
+                              nama: Req[i].nama,
+                              produk: Req[i].produk,
+                              harga: Req[i].harga,
+                              gambar: Req[i].gambar,
+                              dekskripsi: Req[i].dekskripsi)),
+                        ),
                       ),
                     ),
                 ],

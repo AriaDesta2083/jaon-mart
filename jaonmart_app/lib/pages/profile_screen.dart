@@ -3,9 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jaonmart_app/pages/profile_page.dart';
 import 'package:jaonmart_app/pages/splash_screen.dart';
 import 'package:jaonmart_app/services/auth_services.dart';
-import 'package:jaonmart_app/services/database_services.dart';
+import 'package:jaonmart_app/services/storage_services.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/profile_menu.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   String? imagePath;
+  var sendImg;
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -48,17 +50,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           String? myimage;
                           for (var i = 0; i < myProfile.length; i++) {
                             myimage = (myProfile[i]['path_image']);
+                            sendImg = myimage;
                           }
                           return (myimage != null)
                               ? CircleAvatar(
                                   backgroundImage: NetworkImage(myimage),
                                 )
                               : CircleAvatar(
-                                  backgroundColor: Colors.black,
+                                  backgroundImage:
+                                      AssetImage('assets/images/AR.jpg'),
                                 );
                         } else {
                           return CircleAvatar(
-                            backgroundColor: Colors.black,
+                            backgroundImage: AssetImage('assets/images/AR.jpg'),
                           );
                         }
                       }),
@@ -79,9 +83,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           onPressed: () async {
                             File file = await getImage();
-                            await DatabaseServices.uploadImage(file);
-                            imagePath =
-                                await DatabaseServices.uploadImage(file);
+                            await StorageServices.uploadImage(file);
+                            imagePath = await StorageServices.uploadImage(file);
                             setState(() {
                               profile.add({
                                 'user_id': widget.user.uid,
@@ -104,7 +107,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               text: "My Account",
               icon: Icon(Icons.account_box_outlined),
               press: () {
-                Navigator.of(context).pushNamed('/account');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfilePage(sendImg.toString())));
               },
             ),
             // ProfileMenu(

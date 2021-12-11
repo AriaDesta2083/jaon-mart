@@ -33,9 +33,9 @@ class TopHome extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100),
                           child: Image.network(
                             myimage,
+                            fit: BoxFit.cover,
                             width: 60,
                             height: 60,
-                            fit: BoxFit.cover,
                           ),
                         )
                       : ClipRRect(

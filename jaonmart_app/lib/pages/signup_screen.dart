@@ -106,14 +106,11 @@ class _SignUpFormState extends State<SignUpForm> {
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
-
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => MyAccount()));
                 await AuthServices.signUp(
                     emailController.text, passController.text);
               }
+              return null;
             },
             child: Text(
               'Continue',

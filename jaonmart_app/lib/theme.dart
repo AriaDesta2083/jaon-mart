@@ -35,6 +35,13 @@ final myStyle = TextStyle(
   height: 1.5,
 );
 
+final myStylelight = TextStyle(
+  fontSize: 15,
+  fontWeight: FontWeight.normal,
+  color: Colors.white,
+  height: 1.5,
+);
+
 const myDuration = Duration(seconds: 2);
 
 ///! SET TEMA

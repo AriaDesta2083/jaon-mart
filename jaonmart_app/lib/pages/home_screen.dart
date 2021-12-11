@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jaonmart_app/model/Item.dart';
@@ -47,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: myBoldStyle.copyWith(fontSize: 24),
               ),
               Text(
-                widget.user.uid,
+                'Jajanan Online Market',
                 style: myBoldStyle.copyWith(
                     color: makeColor,
                     fontWeight: FontWeight.w400,
