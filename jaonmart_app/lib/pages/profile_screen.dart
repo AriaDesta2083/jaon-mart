@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:image_picker/image_picker.dart';
 import 'package:jaonmart_app/pages/profile_page.dart';
 import 'package:jaonmart_app/pages/splash_screen.dart';
@@ -20,11 +21,11 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   String? imagePath;
-  var sendImg;
+  var sendImg = 'default';
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference profile = firestore.collection('profile');
+    CollectionReference img_profile = firestore.collection('img_profile');
     return Scaffold(
       appBar: AppBar(
           // title: Text("Profile"),
@@ -41,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 clipBehavior: Clip.none,
                 children: [
                   StreamBuilder<QuerySnapshot>(
-                      stream: profile
+                      stream: img_profile
                           .where('user_id', isEqualTo: widget.user.uid)
                           .snapshots(),
                       builder: (_, snapshot) {
@@ -50,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           String? myimage;
                           for (var i = 0; i < myProfile.length; i++) {
                             myimage = (myProfile[i]['path_image']);
-                            sendImg = myimage;
+                            sendImg = myimage!;
                           }
                           return (myimage != null)
                               ? CircleAvatar(
@@ -86,7 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             await StorageServices.uploadImage(file);
                             imagePath = await StorageServices.uploadImage(file);
                             setState(() {
-                              profile.add({
+                              img_profile.add({
                                 'user_id': widget.user.uid,
                                 'path_image': imagePath
                               });

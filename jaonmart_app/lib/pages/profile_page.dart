@@ -40,10 +40,15 @@ class ProfilePage extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 3,
                         color: Colors.indigoAccent,
-                        child: Image.network(
-                          img,
-                          fit: BoxFit.cover,
-                        ),
+                        child: (img != 'default')
+                            ? Image.network(
+                                img,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                'assets/images/AR.jpg',
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ],
                   ),

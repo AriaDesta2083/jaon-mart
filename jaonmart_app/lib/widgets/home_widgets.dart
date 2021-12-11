@@ -10,7 +10,7 @@ class TopHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference profile = firestore.collection('profile');
+    CollectionReference img_profile = firestore.collection('img_profile');
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -20,7 +20,8 @@ class TopHome extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => ProfileScreen(user)));
           },
           child: StreamBuilder<QuerySnapshot>(
-              stream: profile.where('user_id', isEqualTo: user.uid).snapshots(),
+              stream:
+                  img_profile.where('user_id', isEqualTo: user.uid).snapshots(),
               builder: (_, snapshot) {
                 if (snapshot.hasData) {
                   var myProfile = snapshot.data!.docs;
