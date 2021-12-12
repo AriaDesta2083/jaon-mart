@@ -34,6 +34,12 @@ final myStyle = TextStyle(
   color: Colors.black,
   height: 1.5,
 );
+final myAppBarStyle = TextStyle(
+  fontSize: 23,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+  height: 1.5,
+);
 
 final myStylelight = TextStyle(
   fontSize: 15,
@@ -79,13 +85,16 @@ AppBarTheme appBarTheme() {
   return AppBarTheme(
     color: Colors.white,
     elevation: 0,
+    shape: Border(
+        bottom:
+            BorderSide(color: makeColor, width: 2, style: BorderStyle.solid)),
     iconTheme: IconThemeData(color: Colors.black),
-    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    systemOverlayStyle: SystemUiOverlayStyle.light,
     toolbarTextStyle: TextTheme(
       headline6: TextStyle(color: Colors.black, fontSize: 24),
     ).bodyText2,
     titleTextStyle: TextTheme(
-      headline6: TextStyle(color: Colors.black, fontSize: 24),
+      headline6: myAppBarStyle,
     ).headline6,
   );
 }

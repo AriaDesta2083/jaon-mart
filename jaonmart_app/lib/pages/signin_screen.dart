@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jaonmart_app/pages/home_screen.dart';
-import 'package:jaonmart_app/pages/splash_screen.dart';
 import 'package:jaonmart_app/services/auth_services.dart';
+import 'package:jaonmart_app/services/wrapper.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/form_widgets.dart';
 
@@ -132,7 +131,6 @@ class _SignFormState extends State<SignForm> {
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
                 await AuthServices.signIn(
                     emailController.text, passController.text);
@@ -157,7 +155,7 @@ class _SignFormState extends State<SignForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: pwNull);
-        } else if (value.length >= 8) {
+        } else if (value.length >= 6) {
           removeError(error: pwFalse);
         }
         return null;

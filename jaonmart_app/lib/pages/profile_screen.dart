@@ -28,8 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     CollectionReference img_profile = firestore.collection('img_profile');
     return Scaffold(
       appBar: AppBar(
-          // title: Text("Profile"),
-          ),
+        title: Text("Profile"),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Column(

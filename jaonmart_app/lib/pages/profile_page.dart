@@ -19,6 +19,9 @@ class ProfilePage extends StatelessWidget {
     var phone = ' ';
     var addres = ' ';
     return Scaffold(
+      appBar: AppBar(
+        title: Text('My Account'),
+      ),
       body: StreamBuilder<QuerySnapshot>(
           stream: profile.where('id', isEqualTo: user.uid).snapshots(),
           builder: (context, snapshot) {
@@ -34,16 +37,27 @@ class ProfilePage extends StatelessWidget {
             return SafeArea(
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 10,
+                  ),
                   Stack(
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 3,
-                        color: Colors.indigoAccent,
+                        color: Colors.white,
                         child: (img != 'default')
-                            ? Image.network(
-                                img,
-                                fit: BoxFit.cover,
+                            ? Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 5),
+                                // borderRadius: BorderRadius.circular(100),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.network(
+                                    img,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               )
                             : Image.asset(
                                 'assets/images/AR.jpg',
@@ -53,7 +67,7 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   Card(
                     shape: RoundedRectangleBorder(
@@ -134,7 +148,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -150,7 +164,6 @@ class ProfilePage extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
                   ),
-                  Spacer(),
                 ],
               ),
             );

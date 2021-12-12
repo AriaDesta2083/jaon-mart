@@ -155,24 +155,18 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
         children: [
-          Text(
-            '${widget.item.nama}',
-            style: myStyle.copyWith(fontSize: 20, color: makeColor),
+          SizedBox(
+            height: 20,
           ),
-          RichText(
-            text: TextSpan(
-              text: 'RP ',
-              style: myBoldStyle.copyWith(fontSize: 15),
-              children: [
-                TextSpan(
-                  text: '${widget.item.harga}',
-                  // text: '${widget.item.harga  * counter}',
-                  style: myBoldStyle.copyWith(
-                      fontSize: 25, fontWeight: FontWeight.w900),
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: Text(
+              '${widget.item.nama}',
+              style: myStyle.copyWith(fontSize: 20, color: makeColor),
             ),
           ),
           SizedBox(
@@ -187,7 +181,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     borderRadius: BorderRadius.circular(10)),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: Container(
-                  width: 210,
+                  width: 220,
                   height: 320,
                   color: Colors.amber,
                   child: Image.asset(
@@ -247,13 +241,19 @@ class _DetailScreenState extends State<DetailScreen> {
           SizedBox(
             height: 20,
           ),
-          Text(
-            'Description',
-            style: myStyle.copyWith(
-              fontSize: 25,
+          Padding(
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              'Description',
+              style: myStyle.copyWith(
+                fontSize: 25,
+              ),
             ),
           ),
-          Text('${widget.item.dekskripsi}'),
+          Padding(
+            padding: const EdgeInsets.all(7),
+            child: Text('${widget.item.dekskripsi}'),
+          ),
         ],
       ),
     );

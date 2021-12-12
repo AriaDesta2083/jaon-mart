@@ -24,8 +24,7 @@ class AuthServices {
       final User? user = result.user;
       return user;
     } catch (eror) {
-      Get.defaultDialog(
-          title: 'Login Gagal', middleText: 'maaf login gagal coba lagi');
+      Get.defaultDialog(title: 'Login Gagal', middleText: eror.toString());
       print(eror.toString());
     }
   }

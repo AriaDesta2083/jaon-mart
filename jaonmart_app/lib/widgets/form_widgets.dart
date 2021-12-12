@@ -60,9 +60,9 @@ class NoAccountText extends StatelessWidget {
 final RegExp emailValidatorRegExp =
     RegExp(r"^[A-Za-z0-9._]+@[A-Za-z0-9]+\.[a-zA-Z]+");
 
-const String emailNulll = "Masukkan Email";
+const String emailNulll = "Email tidak boleh kosong";
 const String emailInvalid = "Masukkan Email dengan benar";
-const String pwNull = "Masukkan Password";
+const String pwNull = "Password tidak boleh kosong";
 const String pwInvalid = "Password terlalu pendek";
 const String pwFalse = "Passwords Salah";
 

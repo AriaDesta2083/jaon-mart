@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jaonmart_app/pages/order_screen.dart';
 import 'package:jaonmart_app/theme.dart';
 import 'package:jaonmart_app/widgets/cart_add.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     User user = Provider.of<User>(context);
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference pesan_item = firestore.collection('pesan_item');
+    CollectionReference pesanItem = firestore.collection('pesan_item');
     return Scaffold(
       body: Scaffold(
         bottomNavigationBar: Container(
@@ -46,7 +47,7 @@ class _CartScreenState extends State<CartScreen> {
                     style: myStyle.copyWith(fontSize: 18, color: makeColor),
                   ),
                   StreamBuilder<QuerySnapshot>(
-                      stream: pesan_item
+                      stream: pesanItem
                           .where('user_id', isEqualTo: user.uid)
                           .snapshots(),
                       builder: (_, snapshot) {
@@ -91,14 +92,17 @@ class _CartScreenState extends State<CartScreen> {
                 ],
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Order()));
+                },
                 style: ElevatedButton.styleFrom(
                     primary: makeColor,
                     fixedSize: Size(150, 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20))),
                 child: Text(
-                  'Payment',
+                  'Order Now',
                   style: myStyle.copyWith(color: Colors.white),
                 ),
               )
@@ -107,7 +111,10 @@ class _CartScreenState extends State<CartScreen> {
         ),
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Text('Cart'),
+          title: Text(
+            'Cart',
+            style: myAppBarStyle,
+          ),
         ),
         body: SafeArea(
           child: ListView(
@@ -138,9 +145,8 @@ class _CartScreenState extends State<CartScreen> {
               // )
 
               StreamBuilder<QuerySnapshot>(
-                stream: pesan_item
-                    .where('user_id', isEqualTo: user.uid)
-                    .snapshots(),
+                stream:
+                    pesanItem.where('user_id', isEqualTo: user.uid).snapshots(),
                 builder: (_, snapshot) {
                   if (snapshot.hasData) {
                     var myItems = snapshot.data!.docs;
@@ -156,19 +162,19 @@ class _CartScreenState extends State<CartScreen> {
                               item['harga'],
                               item['dekskripsi'],
                               upCart: () {
-                                pesan_item
+                                pesanItem
                                     .doc(item.id)
                                     .update({'qty': item['qty'] + 1});
                               },
                               minCart: () {
                                 if (item['qty'] > 0) {
-                                  pesan_item
+                                  pesanItem
                                       .doc(item.id)
                                       .update({'qty': item['qty'] - 1});
                                 }
                               },
                               delCart: () {
-                                pesan_item.doc(item.id).delete();
+                                pesanItem.doc(item.id).delete();
                               },
                             ),
                           )

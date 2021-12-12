@@ -105,12 +105,14 @@ class _SignUpFormState extends State<SignUpForm> {
                 fixedSize: Size(double.maxFinite, 56)),
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
                 KeyboardUtil.hideKeyboard(context);
+                _formKey.currentState!.save();
                 await AuthServices.signUp(
                     emailController.text, passController.text);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Wrapper()));
               }
-              return null;
+              return;
             },
             child: Text(
               'Continue',
