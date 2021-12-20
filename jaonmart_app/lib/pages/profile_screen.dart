@@ -22,6 +22,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   String? imagePath;
   var sendImg = 'default';
+  final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -83,8 +84,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             backgroundColor: Color(0xFFF5F6F9),
                           ),
                           onPressed: () async {
-                            File file = await getImage();
-                            await StorageServices.uploadImage(file);
+                            XFile? file = await getImage();
+                            await StorageServices.uploadImage(file!);
                             imagePath = await StorageServices.uploadImage(file);
                             setState(() {
                               img_profile.add({
@@ -144,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Future<File> getImage() async {
-    return await ImagePicker.pickImage(source: ImageSource.gallery);
+  Future<XFile?> getImage() async {
+    return await _picker.pickImage(source: ImageSource.gallery);
   }
 }
