@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jaonmart_app">
    <application
-        android:label="jaonmart_app"
+        android:label="jaon-mart"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
